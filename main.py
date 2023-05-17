@@ -1,12 +1,18 @@
-
-
 from TelegrammBot import TelegramBot
+from dotenv import load_dotenv
+import os
 
+# Завантажити змінні оточення з файлу .env
+load_dotenv()
+
+# Використовувати змінні оточення
+api_key = os.getenv("API_KEY")
+db_host = os.getenv("DB_HOST")
 
 def get_api_credentials():
     # Введіть ваші API ID та API Hash тут
-    api_id = '21304077'
-    api_hash = 'eee634d8a5f1bf36d0b5117568180a26'
+    api_id = os.getenv("API_ID")
+    api_hash = os.getenv("API_HASH")
     return api_id, api_hash
 
 
