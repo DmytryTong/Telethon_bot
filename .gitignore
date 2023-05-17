@@ -1,2 +1,5 @@
 __pycache__/
 .idea
+bots.db
+session.session
+bot.session

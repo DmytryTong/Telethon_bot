@@ -1,3 +1,5 @@
+from re import findall
+from sympy import *
 from telethon.sync import TelegramClient
 from telethon import events
 import sqlite3
@@ -48,14 +50,14 @@ class TelegramBot:
                     await event.respond('Немає доступного методу для цього бота.')
 
             async def process_group_message(event):
-                # Додайте обробку повідомлень в групі
+                # Додати обробку повідомлень в групі (для розширення)
                 pass
 
             async def execute_bot_method(method, event):
                 if method == 'captcha':
                     await solve_captcha(event)
                 elif method == 'other_method':
-                    # Додайте код для іншого методу
+                    # Додати код для іншого методу (для розширення)
                     pass
                 else:
                     await event.respond('Невідомий метод бота.')
@@ -72,3 +74,20 @@ class TelegramBot:
             bot.add_event_handler(process_message, events.NewMessage)
 
             bot.run_until_disconnected()
+
+    def extract_equation(self, text):
+        equation_pattern = r'(\d+[+\-*\/]\d+)'
+        matches = findall(equation_pattern, text)
+        if matches:
+            equation = matches[0]
+            result = eval(equation)
+            return result
+        return None
+
+    def solve_equation(self, equation):
+        x = symbols('x')
+        expr = sympify(equation)
+        solution = solve(expr, x)
+        if solution:
+            return solution[0]
+        return None

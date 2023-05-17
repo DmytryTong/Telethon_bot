@@ -1,4 +1,4 @@
-from TelegrammBot import TelegramBot
+from telegramm_bot import TelegramBot
 from dotenv import load_dotenv
 import os
 
